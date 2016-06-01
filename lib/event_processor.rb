@@ -18,24 +18,22 @@ class EventProcessor
   private
 
   def process_id(message)
-    if(!::Identification.user_exists?(message))
-      identification = ::Identification.new(message)
-      identification.save!
+    identification = ::Identification.new(message)
+    identification.save!
 
-      events_to_update = CachedEvent.where(:stream => message["stream"],
-                                     :user_id => message["userId"])
-      events_to_update.each do |cached_event|
-        # This check to handle the case where we get duplicate identification messages
-        if(!@tbd_cached_event_ids.include?(cached_event.id))
-          event_hash =  { :account_id => cached_event.account_id,
-                          :user_id => cached_event.user_id,
-                          :stream => cached_event.stream,
-                          :event => cached_event.event,
-                          :date => cached_event.date
-                        }
-          @aggregate_store.increment_stream_ctr(event_hash)
-          @tbd_cached_event_ids << cached_event.id
-        end
+    events_to_update = CachedEvent.where(:stream => message["stream"],
+                                   :user_id => message["userId"])
+    events_to_update.each do |cached_event|
+      # This check to handle the case where we get duplicate identification messages
+      if(!@tbd_cached_event_ids.include?(cached_event.id))
+        event_hash =  { :account_id => cached_event.account_id,
+                        :user_id => cached_event.user_id,
+                        :stream => cached_event.stream,
+                        :event => cached_event.event,
+                        :date => cached_event.date
+                      }
+        @aggregate_store.increment_stream_ctr(event_hash)
+        @tbd_cached_event_ids << cached_event.id
       end
     end
   end

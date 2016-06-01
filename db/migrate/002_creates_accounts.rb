@@ -12,6 +12,6 @@ class CreatesAccounts < ActiveRecord::Migration
   end
 
   def down
-    delete_table(:accounts)
+    drop_table(:accounts)
   end
 end

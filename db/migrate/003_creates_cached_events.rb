@@ -12,6 +12,6 @@ class CreatesCachedEvents < ActiveRecord::Migration
   end
 
   def down
-    delete_table(:cached_events)
+    drop_table(:cached_events)
   end
 end

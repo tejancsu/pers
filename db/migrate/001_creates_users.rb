@@ -13,6 +13,6 @@ class CreatesUsers < ActiveRecord::Migration
   end
 
   def down
-    delete_table(:users)
+    drop_table(:users)
   end
 end

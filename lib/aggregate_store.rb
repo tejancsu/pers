@@ -1,5 +1,4 @@
 require 'json'
-require 'byebug'
 
 class AggregateStore
   attr_accessor :store
