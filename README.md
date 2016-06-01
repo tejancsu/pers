@@ -1,11 +1,16 @@
 # Zuora Coding challenge
 * The current solution can sustain failures and doesnot regenerate counter from start on failure
 * Also if a user belongs to more than one accounts, those events are flagged
-* I tested this using ruby-2.2.1 [ x86_64 ]
+* I tested this using ruby-2.3.0 on a ubuntu 14.04 ASW instance with 2 GB RAM [ x86_64 ]
+
+##Install
+* Install rvm
+  * \curl -sSL https://get.rvm.io | bash -s stable --ruby
+  * gem install bundler
+  * bundle install
 
 ##Build
 These are the steps that need be run successfully before running the script
-* bundle install
 * rake db:clean
 * rake db:migrate
 
