@@ -40,7 +40,6 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord (~> 3.2)
-  byebug
   json
   rspec
   sqlite3
