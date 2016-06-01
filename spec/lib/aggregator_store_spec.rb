@@ -29,7 +29,7 @@ describe "#AggregateStore" do
       @store_state = @store.instance_variable_get(:@store)
       expect(@store_state.keys.size).to eq(1)
       expect(@store_state["frontleaf"]).not_to be_nil
-      expect(@store_state["frontleaf"][:stream]).to eq("frontleaf")
+      expect(@store_state["frontleaf"]["stream"]).to eq("frontleaf")
       expect(@store_state["frontleaf"]["accounts"]).to_not be_nil
       expect(@store_state["frontleaf"]["users"]).to be_empty
       expect(@store_state["frontleaf"]["accounts"]["paying"]["2015-06-02"]).to_not be_nil
@@ -46,7 +46,7 @@ describe "#AggregateStore" do
       @store_state = @store.instance_variable_get(:@store)
       expect(@store_state.keys.size).to eq(1)
       expect(@store_state["frontleaf"]).not_to be_nil
-      expect(@store_state["frontleaf"][:stream]).to eq("frontleaf")
+      expect(@store_state["frontleaf"]["stream"]).to eq("frontleaf")
       expect(@store_state["frontleaf"]["users"]).to_not be_nil
       expect(@store_state["frontleaf"]["accounts"]).to be_empty
       expect(@store_state["frontleaf"]["users"]["admin"]["2015-06-02"]).to_not be_nil
@@ -65,9 +65,11 @@ describe "#AggregateStore" do
   describe "#reload_aggregate_counters" do
     it "reads json from file" do
       allow(File).to receive(:read).with(@cache_file).and_return(@store_state.to_json)
-      expect(@store.instance_variable_get(:@store)).to be_empty
+      File.stub(:exist?).and_call_original
+      File.stub(:exist?).with(@cache_file).and_return(true)
+      expect(@store.store).to be_empty
       @store.reload_aggregate_counters
-      expect(@store.instance_variable_get(:@store)).to eq(@store_state)
+      expect(@store.store).to eq(@store_state)
     end
   end
 end

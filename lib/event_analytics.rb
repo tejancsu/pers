@@ -1,6 +1,6 @@
 require 'pp'
 
-CHUNK_SIZE = 1000
+CHUNK_SIZE = 10000
 
 class EventAnalytics
   def initialize(file_name, counter_cache_file, processing_state_file, is_retry)

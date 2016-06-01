@@ -46,7 +46,6 @@ class AggregateStore
     stream_ctr["accounts"][account.status][date] ||= {}
     stream_ctr["accounts"][account.status][date][event] ||= 0
     stream_ctr["accounts"][account.status][date][event] += 1
-    print date, stream, account_id, event, "\n"
   end
 
   def update_users_ctr(stream, user_id, date, event)

@@ -7,6 +7,8 @@ project_root = File.dirname(File.absolute_path(__FILE__))
 Dir.glob(project_root + "/app/models/*.rb").each{|f| require f}
 Dir.glob(project_root + "/lib/*.rb").each{|f| require f}
 Dir.glob(project_root + "/lib/messages/*.rb").each{|f| require f}
+Dir.glob(project_root + "/spec/lib/messages/*.rb").each{|f| require f}
+Dir.glob(project_root + "/spec/lib/*.rb").each{|f| require f}
 
 connection_details = YAML::load(File.open('config/database.yml'))
 ActiveRecord::Base.establish_connection(connection_details)
@@ -14,7 +16,7 @@ counter_cache_file = project_root+"/.counter_cache~"
 processing_state_file = project_root+"/.processing_state~"
 
 if __FILE__==$0
-  if ARGV.size != 1
+  if ARGV.size < 1
     puts "Must pass the input file atleast"
     exit
   end

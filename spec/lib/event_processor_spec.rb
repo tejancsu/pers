@@ -5,7 +5,7 @@ describe "#EventProcessor" do
     @aggregate_store = double("aggregate_store")
     allow(::AggregateStore).to receive(:new).and_return(@aggregate_store)
 
-    @event_processor = EventProcessor.new
+    @event_processor = EventProcessor.new("counter_cache_file")
     @id_message = JSON.parse '{
                                     "timestamp": 1437055157310,
                                     "stream": "frontleaf",
@@ -29,7 +29,8 @@ describe "#EventProcessor" do
                                     "event": "login"
                                  }'
 
-    @cached_event1 = double("cashed_event1",:account_id => "A1",
+    @cached_event1 = double("cached_event1",:id => 1,
+                                            :account_id => "A1",
                                             :user_id => "U1",
                                             :stream => "frontleaf",
                                             :event => "click",
