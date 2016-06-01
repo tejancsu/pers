@@ -6,8 +6,11 @@
 ##Install
 * Install rvm
   * \curl -sSL https://get.rvm.io | bash -s stable --ruby
+* Install bundler
   * gem install bundler
+* Install sqlite3
   * apt-get install sqlite3
+* Install all gems dependencies
   * bundle install
 
 ##Build
