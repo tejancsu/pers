@@ -26,7 +26,8 @@ class Identification
     else
       @user = User.where(:stream => message["stream"],
                          :user_id => message["userId"]).first
-      if @user.account_id != @message["accountId"]
+
+      if @user.account_id != @account.id
         puts "Error! User on multiple accounts! : #{@message}"
       end
     end

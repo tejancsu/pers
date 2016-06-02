@@ -6,7 +6,7 @@ class CreatesUsers < ActiveRecord::Migration
       t.string :user_id
       t.string :name
       t.string :role
-      t.string :account_id
+      t.integer :account_id
     end
 
     add_index :users, [:stream, :user_id], :uniqueness => true
